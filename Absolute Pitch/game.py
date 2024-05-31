@@ -2,6 +2,7 @@ import pygame
 from bullet import Bullet
 from enemy import Alien, Port
 from player import Player
+from button import Button
 from global_variables import *
 from random import shuffle
 from break_generator import generator
@@ -10,6 +11,9 @@ import time
 from tone_clouds import play_repeated_tone, toneCloud
 import random
 import json
+import thorpy as tp
+
+
 
 class Game(object): 
 
@@ -106,7 +110,7 @@ class Game(object):
     
     
     def render_text(self, text, time_delay = 3000): #function to render text onto the pygame screen
-        font = pygame.font.Font(None, 25) #None means no pre file to use, 36 is font size
+        font = pygame.font.Font('kongtext/kongtext.ttf', 20)
         text_surface = font.render(text, True, WHITE) #creates text
 
         # Text dimensions
@@ -118,12 +122,17 @@ class Game(object):
 
         self.screen.blit(self.bgimage, (0,0)) #draw in background image
         self.screen.blit(text_surface, (x, y)) #draw text onto center of screen
+  
         pygame.display.flip() #update the display
 
         pygame.time.delay(time_delay)
 
         
-
+    def exit_button_(self):
+        exit_img = pygame.image.load('Images/button.png').convert_alpha()
+        exit_button = Button(20,20,exit_img)
+        if exit_button.draw():
+            exit_game = True
 
     """
     Function: create a list of Alien objects for each note in level
@@ -219,6 +228,8 @@ class Game(object):
 
         bullet = Bullet(RED, screen_width // 2, screen_height // 2)
         self.bullet_list.append(bullet)
+
+
 
     """
     Function: return various values given a Pygame event

@@ -31,9 +31,13 @@ start_game_dict = {"Speed":1, "Score":0, "Level":1, "Note Types": [],
 block_type = "shoot" #starting block type
 
 welcome_text1 = "Welcome to the Battle Star Game!"
-shoot_block_text = "You are starting the shoot block. All Aliens you see will be eney Aliens. Use the arrows to rotate your player to face the enemy Alien, and press S to shoot and kill the enemy."
-shoot_block_text2 = "The longer the Alien is on the screen, the more points you will lose."
-shoot_block_text3 = "You can move your player and shoot before the Alien comes on screen. Just remember you have only one shot, so make it count!"
+shoot_block_text = "You are starting the shoot block."
+shoot_block_text2 = "All Aliens you see will be enemy Aliens."
+shoot_block_text3 = "Use the arrows to rotate your player to face the enemy Alien"
+shoot_block_text4 = "Press S to shoot and kill the enemy."
+shoot_block_text5 = "The faster you shoot the Alien,the more points you gain."
+shoot_block_text6 = "Move your player and shoot before the Alien comes on screen." 
+shoot_block_text7 = "Remember you have only one shot, so make it count!"
 capture_block_text = "You are starting the capture block. All Aliens you will see will be friendly Aliens. Use the arrows to rotate your player to face the friendly Alein, and press C to use your Player to Capture the Alien"
 capture_block_text2 = "The longer the Alien is on the screen, the more points you will lose."
 capture_block_text3 = "You can move your player and capture before the Alien comes on screen. Just remember you have only one capture, so make it count!"
@@ -133,8 +137,10 @@ def main():
 
     exit_game = False
     while not exit_game:
+        
 
         #way to shut off pygame
+        
 
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
@@ -162,6 +168,15 @@ def main():
             game.render_text(shoot_block_text2)
             time.sleep(2)
             game.render_text(shoot_block_text3)
+            #break
+            time.sleep(2)
+            game.render_text(shoot_block_text4)
+            time.sleep(2)
+            game.render_text(shoot_block_text5)
+            time.sleep(2)
+            game.render_text(shoot_block_text6)
+            time.sleep(2)
+            game.render_text(shoot_block_text7)
             time.sleep(2)
             first_trial_shoot = False 
         elif level == 6 and first_trial_capture:
