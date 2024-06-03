@@ -10,7 +10,7 @@ import time
 pygame.init()
 
 # Set up the screen
-screen_width = 800
+screen_width = 750
 screen_height = 600
 screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption("Simple Menu")
@@ -37,10 +37,19 @@ def main_menu():
     while True:
         screen.blit(bgimage, (0,0)) 
         draw_text("Main Menu", font, BLACK, screen, screen_width // 2, 50)
+        draw_text("Main Menu", font, BLACK, screen, screen_width // 2, 50)
+        
+        # Calculate button positions based on screen size
+        button_width = 100
+        button_height = 50
+        button_spacing = 20
+        button_y = screen_height // 2 - (button_height + button_spacing) // 2
+        play_button_x = (screen_width - button_width) // 2
+        quit_button_x = (screen_width - button_width) // 2
         
         # Draw buttons
-        play_button = pygame.Rect(150, 150, 100, 50)
-        quit_button = pygame.Rect(150, 220, 100, 50)
+        play_button = pygame.Rect(play_button_x, button_y, button_width, button_height)
+        quit_button = pygame.Rect(quit_button_x, button_y + button_height + button_spacing, button_width, button_height)
         pygame.draw.rect(screen, GRAY, play_button)
         pygame.draw.rect(screen, GRAY, quit_button)
 
