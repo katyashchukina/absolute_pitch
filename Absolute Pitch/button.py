@@ -10,6 +10,7 @@ class Button():
         self.rect.topleft = (x,y)
         self.clicked = False
     def draw (self):
+        self.screen.blit(self.image, (self.rect.x,self.rect.y))
         action = False
         pos = pygame.mouse.get_pos()
         if self.rect.collidepoint(pos):
@@ -20,5 +21,14 @@ class Button():
                 self.clicked == False
         return action
 
+    
+    def exit_button_(self):
+        exit_img = pygame.image.load('Images/button.png').convert_alpha()
+        exit_button = Button(20,20,exit_img)
+        exit_button.draw()
+        if exit_button.draw():
+            exit_game = True
+        
 
-        screen.blit(self.image, (self.rect.x,self.rect.y))
+
+        

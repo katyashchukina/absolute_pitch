@@ -917,8 +917,3 @@ if __name__ == "__main__":
     
     game = Game(updateGame=game_dict, alien_notes=new_notes)
     game.full_test()
-
-
-
-
-

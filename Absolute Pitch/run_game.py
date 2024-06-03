@@ -109,13 +109,9 @@ def save_data(username, data, type):
         json.dump(existing_data, file)
 
 
-"""
-Main function
-"""
-def main():
-    username = input("Enter Username: ")
+def run_game(username):
+    exit_game=False
     game_dict = load_data(username)
-
     #reset number correct and total number
     game_dict["Number Correct"] = 0
     game_dict["Total Trials"] = 0
@@ -123,25 +119,8 @@ def main():
     #reset to medium speed so participants are not bombarded
     if game_dict["Speed"] == 3:
         print("Changing speed")
-        game_dict["Speed"] = 2
-
-    
-        
-
-    #Main Game functionality
-    
-    #initialize pygame
-    pygame.init()
-    pygame.font.init()
-
-
-    exit_game = False
-    while not exit_game:
-        
-
-        #way to shut off pygame
-        
-
+        game_dict["Speed"] = 2 
+    while True:
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_q or event.key == pygame.K_ESCAPE:
@@ -207,15 +186,11 @@ def main():
 
 
         #save our dictionary data to the file 
-        save_data(username, current_dict, type="dict")
+        run_game.save_data(username, current_dict, type="dict")
 
         
         if not continue_game: #break out of while loop if hit exit during update frame function
             break
 
         pygame.time.delay(2000) #wait before next trial
-    
-
-if __name__ == "__main__":
-    main()
     
