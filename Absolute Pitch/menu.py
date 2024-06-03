@@ -13,15 +13,16 @@ pygame.init()
 screen_width = 750
 screen_height = 600
 screen = pygame.display.set_mode((screen_width, screen_height))
-pygame.display.set_caption("Simple Menu")
+pygame.display.set_caption("Alien Game!!!!")
 
 # Colors
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 GRAY = (128, 128, 128)
+YELLOW = (235, 150, 23)
 
 # Set font
-font = pygame.font.SysFont(None, 50)
+font = pygame.font.Font('kongtext/kongtext.ttf', 20)
 
 
 def draw_text(text, font, color, surface, x, y):
@@ -50,12 +51,12 @@ def main_menu():
         # Draw buttons
         play_button = pygame.Rect(play_button_x, button_y, button_width, button_height)
         quit_button = pygame.Rect(quit_button_x, button_y + button_height + button_spacing, button_width, button_height)
-        pygame.draw.rect(screen, GRAY, play_button)
-        pygame.draw.rect(screen, GRAY, quit_button)
+        pygame.draw.rect(screen, BLACK, play_button)
+        pygame.draw.rect(screen, BLACK, quit_button)
 
         
-        draw_text("Play", font, BLACK, screen, play_button.centerx, play_button.centery)
-        draw_text("Quit", font, BLACK, screen, quit_button.centerx, quit_button.centery)
+        draw_text("Play", font, YELLOW, screen, play_button.centerx, play_button.centery)
+        draw_text("Quit", font, YELLOW, screen, quit_button.centerx, quit_button.centery)
         
         pygame.display.update()
         
