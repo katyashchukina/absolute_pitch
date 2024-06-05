@@ -182,34 +182,38 @@ def run_game(username,new):
                     game.render_text(texts[current_index])
 
                 
-            """ game.render_text(welcome_text1)
-            time.sleep(2)
-            c
-            time.sleep(2)
-            game.render_text(shoot_block_text2)
-            time.sleep(2)
-            game.render_text(shoot_block_text3)
-            #break
-            time.sleep(2)
-            game.render_text(shoot_block_text4)
-            time.sleep(2)
-            game.render_text(shoot_block_text5)
-            time.sleep(2)
-            game.render_text(shoot_block_text6)
-            time.sleep(2)
-            game.render_text(shoot_block_text7)
-            time.sleep(2) """
             first_trial_shoot = False 
         elif level == 6 and first_trial_capture:
-            game.render_text(capture_block_text)
-            time.sleep(2)
-            game.render_text(capture_block_text2)
-            time.sleep(2)
-            game.render_text(capture_block_text3)
-            time.sleep(2)
+            current_index = 8
+            while (current_index < 11):
+                for event in pygame.event.get():
+                    if event.type == pygame.QUIT:
+                        pygame.quit()
+                        sys.exit()
+                    elif event.type == pygame.KEYDOWN:
+                        if event.key == pygame.K_SPACE:
+                            current_index += 1
+                        elif event.key == pygame.K_s:
+                            current_index=30
+
+                if current_index < 11:
+                    game.render_text(texts[current_index])
             first_trial_capture = False
         elif level == 11 and first_trial_both:
-            game.render_text(both_block_text)
+            current_index = 8
+            while (current_index < 14):
+                for event in pygame.event.get():
+                    if event.type == pygame.QUIT:
+                        pygame.quit()
+                        sys.exit()
+                    elif event.type == pygame.KEYDOWN:
+                        if event.key == pygame.K_SPACE:
+                            current_index += 1
+                        elif event.key == pygame.K_s:
+                            current_index=30
+
+                if current_index < 14:
+                    game.render_text(texts[current_index])
             first_trial_both = False
         
 
