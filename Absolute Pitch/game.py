@@ -109,9 +109,33 @@ class Game(object):
     """
     
     
-    def render_text(self, text, time_delay = 3000): #function to render text onto the pygame screen
+    def render_text(self, text, time_delay = 1000): #function to render text onto the pygame screen
+        max_line_length = 30
         font = pygame.font.Font('kongtext/kongtext.ttf', 20)
-        text_surface = font.render(text, True, WHITE) #creates text
+        # Split text into lines
+        words = text.split(' ')
+        lines = []
+        current_line = ""
+        for word in words:
+            if len(current_line + word) <= max_line_length:
+                current_line += (word + " ")
+            else:
+                lines.append(current_line.strip())
+                current_line = word + " "
+        lines.append(current_line.strip())
+        # Render each line of text
+        total_height = sum(font.size(line)[1] for line in lines)
+        y_offset = (self.screen_height - total_height) // 2
+
+        self.screen.blit(self.bgimage, (0,0)) 
+        for line in lines:
+            text_surface = font.render(line, True, WHITE)
+            text_width, text_height = text_surface.get_size()
+            text_rect = text_surface.get_rect(center=(self.screen_width // 2, y_offset))
+            self.screen.blit(text_surface, text_rect)
+            y_offset += font.size(line)[1]
+         
+        """ text_surface = font.render(text, True, WHITE) #creates text
 
         # Text dimensions
         text_width, text_height = text_surface.get_size()
@@ -119,9 +143,9 @@ class Game(object):
         # Calculating the position
         x = (self.screen_width - text_width) // 2  # Horizontal center
         y = (self.screen_height - text_height) // 2 #Vertical center
-
-        self.screen.blit(self.bgimage, (0,0)) #draw in background image
-        self.screen.blit(text_surface, (x, y)) #draw text onto center of screen
+ """
+        #self.screen.blit(self.bgimage, (0,0)) #draw in background image
+        #self.screen.blit(text_surface, (x, y)) #draw text onto center of screen
   
         pygame.display.flip() #update the display
 
