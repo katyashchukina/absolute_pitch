@@ -2,7 +2,6 @@ import pygame
 from bullet import Bullet
 from enemy import Alien, Port
 from player import Player
-from button import Button
 from global_variables import *
 from random import shuffle
 from break_generator import generator
@@ -11,7 +10,8 @@ import time
 from tone_clouds import play_repeated_tone, toneCloud
 import random
 import json
-import thorpy as tp
+from button import ExitButton
+
 
 
 
@@ -128,11 +128,6 @@ class Game(object):
         pygame.time.delay(time_delay)
 
         
-    def exit_button_(self):
-        exit_img = pygame.image.load('Images/button.png').convert_alpha()
-        exit_button = Button(20,20,exit_img)
-        if exit_button.draw():
-            exit_game = True
 
     """
     Function: create a list of Alien objects for each note in level
@@ -593,7 +588,7 @@ class Game(object):
         screen = pygame.display.set_mode(size, pygame.FULLSCREEN)
 
         screen = pygame.display.set_mode(size, pygame.FULLSCREEN)
-
+        exit_button = ExitButton()
         #Create ports and adds them to a list
         self.create_ports()
 

@@ -1,10 +1,11 @@
 import pygame
 import sys
-import run_game
+import operate_game
 import os, json
 from global_variables import *
 from game import Game
 import time
+from button import Button
 
 # Initialize Pygame
 pygame.init()
@@ -55,8 +56,15 @@ def main_menu():
         pygame.draw.rect(screen, BLACK, quit_button)
 
         
-        draw_text("Play", font, YELLOW, screen, play_button.centerx, play_button.centery)
-        draw_text("Quit", font, YELLOW, screen, quit_button.centerx, quit_button.centery)
+        exit_button = Button(350, 200, 100, 50, BLACK, "Exit")
+        new_game_button = Button(350, 300, 100, 50, BLACK, "New Game")
+        keep_going_button = Button(350, 400, 150, 50, BLACK, "Keep Going")
+
+
+        # Draw buttons
+        exit_button.draw(screen)
+        new_game_button.draw(screen)
+        keep_going_button.draw(screen)
         
         pygame.display.update()
         
@@ -74,12 +82,25 @@ def main_menu():
                     pygame.quit()
                     sys.exit()
             elif event.type == pygame.MOUSEBUTTONDOWN:
-                mouse_pos = event.pos
+                if exit_button.is_clicked(event.pos):
+                    pygame.quit()
+                    sys.exit()
+                elif new_game_button.is_clicked(event.pos):
+                    print("New Game button clicked!")
+                    operate_game.run_game(username,True)
+                    
+
+                    # You can call your new game function here
+                elif keep_going_button.is_clicked(event.pos):
+                    print("Keep Going button clicked!")
+                    operate_game.run_game(username,False)
+                    # You can call your keep going function here
+                """  mouse_pos = event.pos
                 if play_button.collidepoint(mouse_pos):
                     # Call function to start the game
                     run_game.run_game(username)
                 elif quit_button.collidepoint(mouse_pos):
-                    return
+                    return """
 
 
 
