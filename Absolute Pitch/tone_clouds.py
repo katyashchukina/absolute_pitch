@@ -21,7 +21,7 @@ def create_pygame_sound(wave):
 
     # Ensure the array is C-contiguous
     stereo_wave_contiguous = np.ascontiguousarray(stereo_wave)
-
+    pygame.mixer.init()
     sound = pygame.sndarray.make_sound(stereo_wave_contiguous)
 
     return sound
