@@ -5,6 +5,7 @@ from global_variables import *
 from game import Game
 import time
 from button import ExitButton
+import sys
 
 
 #Things to add: octave functionaltiy with tones, consistent tone playing during movement, auto saving and reloading in level, score decreasing while time elapses,
@@ -144,7 +145,8 @@ def run_game(username,new):
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_q or event.key == pygame.K_ESCAPE:
-                    exit_game = True
+                    pygame.quit()
+                    sys.exit()
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_pos = pygame.mouse.get_pos()
                 if exit_button.is_clicked(mouse_pos):

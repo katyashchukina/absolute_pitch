@@ -9,6 +9,7 @@ from button import Button
 
 # Initialize Pygame
 pygame.init()
+pygame.mixer.init()
 
 # Set up the screen
 screen_width = 750
@@ -24,7 +25,8 @@ YELLOW = (235, 150, 23)
 
 # Set font
 font = pygame.font.Font('kongtext/kongtext.ttf', 20)
-
+music = pygame.mixer.music.load(os.path.join('sound', 'background_music.mp3'))
+click = pygame.mixer.Sound(os.path.join('sound', 'click_sound.wav'))
 
 def draw_text(text, font, color, surface, x, y):
     text_obj = font.render(text, True, color)
@@ -34,13 +36,17 @@ def draw_text(text, font, color, surface, x, y):
 
 def main_menu():
     bgimage=pygame.image.load("Images/planet.bmp") #background image
+    music=False
+    pygame.mixer.music.play(-1)
+    music = True
     #bgimage = pygame.transform.scale(bgimage, (screen_width, screen_height))
     username = input("Enter Username: ")
     while True:
         screen.blit(bgimage, (0,0)) 
         draw_text("Main Menu", font, BLACK, screen, screen_width // 2, 50)
         draw_text("Main Menu", font, BLACK, screen, screen_width // 2, 50)
-        
+        if not music:
+            pygame.mixer.music.play(-1)
         # Calculate button positions based on screen size
         button_width = 100
         button_height = 50
@@ -65,42 +71,46 @@ def main_menu():
         exit_button.draw(screen)
         new_game_button.draw(screen)
         keep_going_button.draw(screen)
+
+        
         
         pygame.display.update()
         
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_q or event.key == pygame.K_ESCAPE:
+                    
                     pygame.quit()
                     sys.exit()
 
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-            elif event.type == pygame.KEYDOWN:
+                """  elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     pygame.quit()
-                    sys.exit()
+                    sys.exit() """
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if exit_button.is_clicked(event.pos):
+                    pygame.mixer.Sound.play(click)
                     pygame.quit()
                     sys.exit()
                 elif new_game_button.is_clicked(event.pos):
-                    print("New Game button clicked!")
+                    #print("New Game button clicked!")
+                    pygame.mixer.Sound.play(click)
+                    music=False
+                    pygame.mixer.music.stop()
                     operate_game.run_game(username,True)
                     
 
                     # You can call your new game function here
                 elif keep_going_button.is_clicked(event.pos):
-                    print("Keep Going button clicked!")
+                    #print("Keep Going button clicked!")
+                    pygame.mixer.Sound.play(click)
+                    music=False
+                    pygame.mixer.music.stop()
                     operate_game.run_game(username,False)
-                    # You can call your keep going function here
-                """  mouse_pos = event.pos
-                if play_button.collidepoint(mouse_pos):
-                    # Call function to start the game
-                    run_game.run_game(username)
-                elif quit_button.collidepoint(mouse_pos):
-                    return """
+   
 
 
 
