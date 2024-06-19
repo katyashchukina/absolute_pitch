@@ -119,7 +119,7 @@ def save_data(username, data, type):
 def run_game(username,new):
     exit_game=False
     if new:
-        print("yay")
+        #print("yay")
         game_dict = {"Speed":1, "Score":0, "Level":1, "Note Types": [], 
              "Octave Variance": "low", 
              "Number Correct":0, "Total Aliens":2, "Total Trials":0, 
@@ -139,9 +139,6 @@ def run_game(username,new):
         game_dict["Speed"] = 2 
     
     while True:
-        #exit button doesnt work yet :(
-        # Create the exit button
-        exit_button = ExitButton()
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_q or event.key == pygame.K_ESCAPE:
@@ -221,9 +218,9 @@ def run_game(username,new):
 
         #new speed and new level text
         if new_level:
-            game.render_text(new_level_text)
+            game.render_text("Next Level")
         if new_speed and not new_level:
-            game.render_text(new_speed_text)
+            game.render_text("Increasing Speed")
 
         #run the update game function
         continue_game, current_dict = game.update_frame()

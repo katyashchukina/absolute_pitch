@@ -6,6 +6,8 @@ from global_variables import *
 from game import Game
 import time
 from button import Button
+import imp
+from global_variables import *
 #from login import run_login
 
 # Initialize Pygame
@@ -13,9 +15,12 @@ pygame.init()
 pygame.mixer.init()
 
 # Set up the screen
-screen_width = 750
-screen_height = 600
-screen = pygame.display.set_mode((screen_width, screen_height))
+#screen_width = 750
+#screen_height = 600
+display_info = pygame.display.Info()
+WIDTH = display_info.current_w
+HEIGHT = display_info.current_h
+screen = pygame.display.set_mode((WIDTH,HEIGHT))
 pygame.display.set_caption("Alien Game!!!!")
 
 # Colors
@@ -43,18 +48,19 @@ def main_menu(username):
     #bgimage = pygame.transform.scale(bgimage, (screen_width, screen_height))
     #username = input("Enter Username: ")
     while True:
+        bgimage = pygame.transform.scale(bgimage, (WIDTH,HEIGHT))
         screen.blit(bgimage, (0,0)) 
-        draw_text("Main Menu", font, BLACK, screen, screen_width // 2, 50)
+        draw_text("Main Menu", font, BLACK, screen, WIDTH // 2, 50)
         #draw_text("Main Menu", font, BLACK, screen, screen_width // 2, 50)
         if not music:
             pygame.mixer.music.play(-1)
         # Calculate button positions based on screen size
         button_width = 100
         button_height = 50
-        button_spacing = 20
-        button_y = screen_height // 2 - (button_height + button_spacing) // 2
-        play_button_x = (screen_width - button_width) // 2
-        quit_button_x = (screen_width - button_width) // 2
+        button_spacing = 100
+        button_x = WIDTH // 2
+        
+        
         
         # Draw buttons
         # play_button = pygame.Rect(play_button_x, button_y, button_width, button_height)
@@ -63,9 +69,9 @@ def main_menu(username):
         # pygame.draw.rect(screen, BLACK, quit_button)
 
         
-        exit_button = Button(350, 200, 100, 50, BLACK, "Exit")
-        new_game_button = Button(350, 300, 100, 50, BLACK, "New Game")
-        keep_going_button = Button(350, 400, 150, 50, BLACK, "Keep Going")
+        exit_button = Button(button_x-2, 200, 100, 50, BLACK, "Exit")
+        new_game_button = Button(button_x-4, 400, 100, 50, BLACK, "New Game")
+        keep_going_button = Button(button_x-4.5, 600, 100, 50, BLACK, "Keep Going")
 
 
         # Draw buttons

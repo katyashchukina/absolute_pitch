@@ -91,7 +91,7 @@ class Game(object):
         #Initialize various screen conditions
 
         pygame.init() #initialize pygame
-
+        #WIDTH, HEIGHT = 640, 480
         self.display_info = pygame.display.Info()
         self.screen_width = self.display_info.current_w
         self.screen_height = self.display_info.current_h

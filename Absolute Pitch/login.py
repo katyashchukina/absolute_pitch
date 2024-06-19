@@ -9,8 +9,10 @@ pygame.init()
 pygame.mixer.init()
 
 # Set up the display
-WIDTH, HEIGHT = 640, 480
-screen = pygame.display.set_mode((WIDTH, HEIGHT))
+display_info = pygame.display.Info()
+WIDTH = display_info.current_w
+HEIGHT = display_info.current_h
+screen = pygame.display.set_mode((WIDTH,HEIGHT))
 pygame.display.set_caption("Login Screen")
 
 # Define colors
@@ -57,14 +59,6 @@ def run_login():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-            #if event.type == pygame.MOUSEBUTTONDOWN:
-                # If the user clicked on the input box
-                #main_menu(username)
-                #if input_box.collidepoint(event.pos):
-                    #active = not active
-                #else:
-                    #active = False
-                #color = color_active if active else color_inactive
             if event.type == pygame.KEYDOWN:
                 #if active:
                     if event.key == pygame.K_RETURN:
@@ -74,24 +68,26 @@ def run_login():
                         username = username[:-1]
                     else:
                         username += event.unicode
-
-        screen.fill(WHITE)
+        bgimage=pygame.image.load("Images/planet.bmp") #background image
+        bgimage = pygame.transform.scale(bgimage, (WIDTH,HEIGHT))
+        screen.blit(bgimage, (0,0))
 
         # Render the current text or placeholder text
         if username == '':
             txt_surface = placeholder_surface
         else:
-            txt_surface = font.render(username, True, BLACK)
+            txt_surface = font.render(username, True, WHITE)
 
         # Resize the box if the text is too long
         width = max(200, txt_surface.get_width()+10)
         input_box.w = width
         input_box.x = (WIDTH // 2) - (width // 2)
+        input_box.y = (HEIGHT // 2)
 
         # Blit the text
         screen.blit(txt_surface, (input_box.x+5, input_box.y+5))
         # Blit the input_box rect
-        pygame.draw.rect(screen, BLACK, input_box, 2)
+        pygame.draw.rect(screen, WHITE, input_box, 2)
 
         # Update the display
         pygame.display.flip()
