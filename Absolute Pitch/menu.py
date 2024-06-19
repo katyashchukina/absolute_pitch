@@ -6,6 +6,7 @@ from global_variables import *
 from game import Game
 import time
 from button import Button
+#from login import run_login
 
 # Initialize Pygame
 pygame.init()
@@ -34,17 +35,17 @@ def draw_text(text, font, color, surface, x, y):
     text_rect.center = (x, y)
     surface.blit(text_obj, text_rect)
 
-def main_menu():
+def main_menu(username):
     bgimage=pygame.image.load("Images/planet.bmp") #background image
     music=False
     pygame.mixer.music.play(-1)
     music = True
     #bgimage = pygame.transform.scale(bgimage, (screen_width, screen_height))
-    username = input("Enter Username: ")
+    #username = input("Enter Username: ")
     while True:
         screen.blit(bgimage, (0,0)) 
         draw_text("Main Menu", font, BLACK, screen, screen_width // 2, 50)
-        draw_text("Main Menu", font, BLACK, screen, screen_width // 2, 50)
+        #draw_text("Main Menu", font, BLACK, screen, screen_width // 2, 50)
         if not music:
             pygame.mixer.music.play(-1)
         # Calculate button positions based on screen size
@@ -56,10 +57,10 @@ def main_menu():
         quit_button_x = (screen_width - button_width) // 2
         
         # Draw buttons
-        play_button = pygame.Rect(play_button_x, button_y, button_width, button_height)
-        quit_button = pygame.Rect(quit_button_x, button_y + button_height + button_spacing, button_width, button_height)
-        pygame.draw.rect(screen, BLACK, play_button)
-        pygame.draw.rect(screen, BLACK, quit_button)
+        # play_button = pygame.Rect(play_button_x, button_y, button_width, button_height)
+        # quit_button = pygame.Rect(quit_button_x, button_y + button_height + button_spacing, button_width, button_height)
+        # pygame.draw.rect(screen, BLACK, play_button)
+        # pygame.draw.rect(screen, BLACK, quit_button)
 
         
         exit_button = Button(350, 200, 100, 50, BLACK, "Exit")
@@ -86,10 +87,7 @@ def main_menu():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-                """  elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_ESCAPE:
-                    pygame.quit()
-                    sys.exit() """
+
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if exit_button.is_clicked(event.pos):
                     pygame.mixer.Sound.play(click)
@@ -116,5 +114,3 @@ def main_menu():
 
     
 
-if __name__ == "__main__":
-    main_menu()
